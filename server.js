@@ -1,10 +1,9 @@
-// Note to try from the command line using curl
-// curl -i -X POST -d @params.json --header "Content-Type:application/json" localhost:9090/email
-//
+// Note to try from the command line using curl in the tests folder
+// curl -i -X POST -d @test-mail.json  --header "Content-Type:application/json" localhost:9090/email
 // where you put your parameters that will be posted in the file params.json
 //
 
-var config = require('./config.json');
+var config = require('./config_prod.json');
 var restify = require('restify');
 var reqHandlers = require('./lib/handlers.js');
 
@@ -27,7 +26,8 @@ server.use(restify.throttle({
 
 server.use(restify.bodyParser());
 
-server.post('/email', reqHandlers.sendMail);
+// Add handler for mail submissions
+server.post(config.apiEndpoint, reqHandlers.sendMail);
 
-console.log('API endpoint listening on port ' + config.port);
+console.log('Mail endpoint listening on port ' + config.port + ' at ' + config.apiEndpoint);
 server.listen(config.port);

@@ -1,6 +1,9 @@
 {
     "port": "9090",
+    "apiEndpoint": "/email",
+    "mailTransportService": "Gmail",
     "mailServerCredentials": {"user": "<USER NAME>", "pass": "<PASS>"},
+    "mailReceivers": ["some.guy@mail.net", "another.receiver@another.org"],
     "throttle": { "rate": "2", "burst": "5" }
 }
 

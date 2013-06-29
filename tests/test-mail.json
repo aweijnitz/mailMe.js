@@ -1,0 +1,5 @@
+{
+    "from": "test.data@local.host",
+    "subject": "TEST: Subject",
+    "msg": "TEST: Message Body."
+}

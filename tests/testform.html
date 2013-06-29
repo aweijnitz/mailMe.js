@@ -1,0 +1,181 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Mail Me Test Form</title>
+    <meta name="description" content="Test form and example for mailMe.js">
+    <meta name="author" content="Anders Weijnitz">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+    <link href="http://netdna.bootstrapcdn.com/bootswatch/2.3.2/cosmo/bootstrap.min.css" rel="stylesheet">
+
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+</head>
+
+<body>
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span4">
+            <h2>Contact</h2>
+        </div>
+        <!-- /span4 -->
+    </div>
+    <!-- /row-fluid -->
+    <div class="row-fluid">
+        <div class="span4">
+            <h4 class="intro">Try mailMe.js!</h4>
+
+            <p>This is a test form for mailMe.js.</p>
+
+        </div>
+        <!-- /span4 -->
+
+        <div class="span8">
+
+            <div class="row-fluid">
+                <div class="span12">
+                </div>
+                <!-- /span12 -->
+            </div>
+            <!-- /row-fluid -->
+
+            <form method="POST" action="#" onsubmit="submitMail()">
+
+                <div class="row-fluid">
+                    <div class="span6">
+                        <div class="control-group">
+                            <label for="name" class="control-label">Name:</label>
+
+                            <div class="controls">
+                                <input class="span12" type="text" name="contact_name" id="name">
+                            </div>
+                            <!-- /controls -->
+                        </div>
+                        <!-- /control-group -->
+                    </div>
+                    <!-- /span6 -->
+                    <div class="span6">
+                        <div class="control-group">
+                            <label for="email" class="control-label">Email:</label>
+
+                            <div class="controls">
+                                <input class="span12" type="email" name="contact_email" id="email">
+                            </div>
+                            <!-- /controls -->
+                        </div>
+                        <!-- /control-group -->
+                    </div>
+                    <!-- /span6 -->
+                </div>
+                <!-- /row-fluid -->
+
+                <div class="row-fluid">
+                    <div class="span6">
+                        <div class="control-group">
+                            <label for="phone" class="control-label">Phone Number:</label>
+
+                            <div class="controls">
+                                <input class="span12" type="tel" name="contact_phone" id="phone">
+                            </div>
+                            <!-- /controls -->
+                        </div>
+                        <!-- /control-group -->
+                    </div>
+                    <!-- /span6 -->
+                    <div class="span6">
+                        <div class="control-group">
+                            <label for="website" class="control-label">Your Website:</label>
+
+                            <div class="controls">
+                                <input class="span12" type="url" name="contact_website" id="website">
+                            </div>
+                            <!-- /controls -->
+                        </div>
+                        <!-- /control-group -->
+                    </div>
+                    <!-- /span6 -->
+                </div>
+                <!-- /row-fluid -->
+
+                <div class="row-fluid">
+                    <div class="span12">
+                        <div class="control-group">
+                            <label for="message" class="control-label">Your Message:</label>
+
+                            <div class="controls">
+                                <textarea class="span12" type="text" name="contact_message" id="message"
+                                          rows="4"></textarea>
+                            </div>
+                            <!-- /controls -->
+                        </div>
+                        <!-- /control-group -->
+                    </div>
+                    <!-- /span12 -->
+                </div>
+                <!-- /row-fluid -->
+
+                <input type="hidden" name="save" value="contact">
+                <button type="submit" class="btn-inverse pull-right">
+                    Send <span>Message</span>
+                    <i class="icon-circle-arrow-right"></i>
+                </button>
+            </form>
+            <!-- /form -->
+        </div>
+        <!-- /span8 -->
+
+        <div id="footer">
+            <div class="row-fluid">
+                <div class="span12">
+
+                </div>
+                <!-- /span12 -->
+            </div>
+            <!-- /row-fluid -->
+        </div>
+        <!-- /footer -->
+    </div>
+    <!-- /row-fluid -->
+    <div class="row-fluid">
+        <div class="span12" id="result">
+        </div>
+        <!-- /span4 -->
+    </div>
+</div>
+<!-- /container-fluid -->
+
+
+<!-- JAVASCRIPTS -->
+<script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+    // Post submitted email to server
+    var submitMail = function () {
+        var url = "http://127.0.0.1:9090/email"; // Default API ENDPOINT
+        var from = $('#name');
+        var fromEmail = $('#email');
+        var subject = "WEBSITE CONTACT REQUEST"
+        var msgBody = $('message') + '\n' + '\n'
+                + "FROM: " + from + '\n'
+                + "EMAIL " + fromEmail + '\n'
+                + "PHONE " + $('phone') + '\n'
+                + "WEB " + $('website');
+        var maildata = {
+            from: fromEmail,
+            subject: subject,
+            msg: msgBody
+        };
+
+        $.post(url, maildata, function (data) {
+            $('#result').html(data);
+        });
+
+    }
+
+
+</script>
+</body>
+</html>
