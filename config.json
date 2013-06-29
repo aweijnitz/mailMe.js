@@ -1,6 +1,6 @@
 {
     "port": "9090",
-    "mailServerCredentials": {"user": "mailer.raspberry.pi@gmail.com", "pass": "derl5yev5gu8wi7dad"},
+    "mailServerCredentials": {"user": "<USER NAME>", "pass": "<PASS>"},
     "throttle": { "rate": "2", "burst": "5" }
 }
 
