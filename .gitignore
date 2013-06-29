@@ -1,4 +1,4 @@
-config.json_prod
+config_prod.json
 .idea
 lib-cov
 *.seed
