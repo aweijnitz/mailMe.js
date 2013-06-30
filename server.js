@@ -5,6 +5,7 @@
 
 var config = require('./config_prod.json');
 var restify = require('restify');
+var bunyan = require('bunyan');
 var reqHandlers = require('./lib/handlers.js');
 
 if(!config) {
@@ -42,6 +43,7 @@ server.post(config.apiEndpoint, reqHandlers.sendMail);
 
 // Add a simple GET handler. Useful for checking service availability. 
 server.get(config.apiEndpoint, function (req, res, next) {
+    var logger = req.log;
     logger.info("GET received on " + config.apiEndpoint + ". Returning status 200");
     res.send(200, "Mailer ready!");
     return next();
