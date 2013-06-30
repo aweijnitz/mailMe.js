@@ -43,7 +43,7 @@
             </div>
             <!-- /row-fluid -->
 
-            <form method="POST" action="#" onsubmit="submitMail()">
+            <form method="POST" onsubmit="submitMail()">
 
                 <div class="row-fluid">
                     <div class="span6">
@@ -158,19 +158,20 @@
         var from = $('#name');
         var fromEmail = $('#email');
         var subject = "WEBSITE CONTACT REQUEST"
-        var msgBody = $('message') + '\n' + '\n'
+        var msgBody = $('#message') + '\n' + '\n'
                 + "FROM: " + from + '\n'
                 + "EMAIL " + fromEmail + '\n'
-                + "PHONE " + $('phone') + '\n'
-                + "WEB " + $('website');
+                + "PHONE " + $('#phone') + '\n'
+                + "WEB " + $('#website');
         var maildata = {
             from: fromEmail,
             subject: subject,
             msg: msgBody
         };
-
+        console.log("About to SEND " + maildata);
         $.post(url, maildata, function (data) {
             $('#result').html(data);
+            console.log("RECEIVED "+data);
         });
 
     }
