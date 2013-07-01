@@ -42,9 +42,7 @@
                 <!-- /span12 -->
             </div>
             <!-- /row-fluid -->
-
-            <form method="POST" onsubmit="submitMail()">
-
+            <form action="">
                 <div class="row-fluid">
                     <div class="span6">
                         <div class="control-group">
@@ -119,7 +117,7 @@
                 <!-- /row-fluid -->
 
                 <input type="hidden" name="save" value="contact">
-                <button type="submit" class="btn-inverse pull-right">
+                <button type="submit" class="btn-inverse pull-right" id="sendButton">
                     Send <span>Message</span>
                     <i class="icon-circle-arrow-right"></i>
                 </button>
@@ -152,30 +150,34 @@
 <!-- JAVASCRIPTS -->
 <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
 <script type="text/javascript">
-    // Post submitted email to server
+
+    // POST submitted email to server
+    //
     var submitMail = function () {
-        var url = "http://127.0.0.1:9090/email"; // Default API ENDPOINT
-        var from = $('#name');
-        var fromEmail = $('#email');
-        var subject = "WEBSITE CONTACT REQUEST"
-        var msgBody = $('#message') + '\n' + '\n'
+        var url = "http://127.0.0.1:9090/email"; // Change to your endpoint
+        var from = $('#name').val();
+        var fromEmail = $('#email').val();
+        var subject = "ANDERSW.INFO CONTACT FORM"
+        var msgBody = $('#message').val() + '\n' + '\n'
                 + "FROM: " + from + '\n'
                 + "EMAIL " + fromEmail + '\n'
-                + "PHONE " + $('#phone') + '\n'
-                + "WEB " + $('#website');
-        var maildata = {
+                + "PHONE " + $('#phone').val() + '\n'
+                + "WEB " + $('#website').val();
+        mailData = {
             from: fromEmail,
             subject: subject,
             msg: msgBody
         };
-        console.log("About to SEND " + maildata);
-        $.post(url, maildata, function (data) {
+        console.log("About to SEND " + JSON.stringify(mailData));
+        $.post(url, mailData, function (data) {
             $('#result').html(data);
             console.log("RECEIVED "+data);
-        });
-
+        }, "json");
+        return false;
     }
 
+
+    $("#sendButton").click(submitMail);
 
 </script>
 </body>

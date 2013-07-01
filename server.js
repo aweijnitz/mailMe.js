@@ -7,6 +7,8 @@ var config = require('./config_prod.json');
 var restify = require('restify');
 var bunyan = require('bunyan');
 var reqHandlers = require('./lib/handlers.js');
+var MailSenderFactory = require('./lib/MailSender.js');
+
 
 if(!config) {
     console.error('Could not find config.json. Make sure it is in the same directory as this file (server.js).');
@@ -22,6 +24,18 @@ var logger = bunyan.createLogger({
         count: 12
     }]
 });
+
+
+// Setup mail transport
+//
+// Valid services
+// Gmail, Hotmail, iCloud, Yahoo, ...
+// see http://www.nodemailer.com/#well-known-services-for-smtp
+var mailSender = MailSenderFactory.createTransport(
+    config.mailServerCredentials.user,
+    config.mailServerCredentials.pass,
+    config.mailTransportService);
+
 
 var server = restify.createServer({
     name: 'mailMe',
@@ -39,7 +53,7 @@ server.use(restify.throttle({
 server.use(restify.bodyParser());
 
 // Add handler for mail submissions
-server.post(config.apiEndpoint, reqHandlers.sendMail);
+server.post(config.apiEndpoint, reqHandlers.createMailHandler(mailSender, config));
 
 // Add a simple GET handler. Useful for checking service availability. 
 server.get(config.apiEndpoint, function (req, res, next) {

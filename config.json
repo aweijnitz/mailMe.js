@@ -5,6 +5,7 @@
     "mailServerCredentials": {"user": "<USER NAME>", "pass": "<PASS>"},
     "mailReceivers": ["some.guy@mail.net", "another.receiver@another.org"],
     "throttle": { "rate": "2", "burst": "5" },
-    "logFile": { "name": "./logs/mailMe.log", "logRotationPeriod": "3m"}
+    "logFile": { "name": "./logs/mailMe.log", "logRotationPeriod": "3m"},
+    "devMode": false
 }
 
