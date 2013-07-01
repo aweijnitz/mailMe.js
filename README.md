@@ -1,6 +1,8 @@
 # mailMe.js
 A Node.js REST webservice to accept requests and send emails. Intended to be used to handle emailing from a Contact form on a webpage via an AJAX call. Includes example client (html page with contact form).
 
+Build status: [![Build Status](https://travis-ci.org/aweijnitz/mailMe.js.png)](https://travis-ci.org/aweijnitz/mailMe.js)
+
 ## Installing mailMe.js
 - Clone this repository to your server `git clone <URL>`
 - Install dependencies `npm install`
