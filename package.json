@@ -5,7 +5,7 @@
   "description": "REST webservice to send email, typically from a contact form on a webpage.",
   "main": "server.js",
   "scripts": {
-    "test": "mocha -R spec"
+    "test": "./node_modules/.bin/mocha --reporter list"
   },
   "repository": {
     "type": "git",
@@ -18,11 +18,15 @@
     "Node.js"
   ],
   "author": "Anders Weijnitz",
-  "license": "BSD",
+  "license": "MIT",
   "dependencies": {
     "restify": "~2.6.0",
     "nodemailer": "~0.4.4",
-    "bunyan": "~0.21.3",
+    "bunyan": "~0.21.4",
+    "should": "~1.2.2"
+  },
+  "devDependencies": {
+    "mocha": "~1.18.2",
     "should": "~1.2.2"
   }
 }
